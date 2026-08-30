@@ -4,8 +4,6 @@ Interactive **Power BI** dashboard analysing Tasmania's short-stay (short-term r
 
 <!-- Crop your screenshot to just the report canvas, name it dashboard-preview.png, and upload it -->
 ![Dashboard preview](dashboard-preview.png)
-<img width="1882" height="1170" alt="dashboard-preview png" src="https://github.com/user-attachments/assets/bedbbc0f-2965-45cd-a265-d8df70c6cf13" />
-
 
 ## Overview
 
@@ -48,9 +46,7 @@ Tables: **Listing**, **Host**, **Geography** (Region / Neighbourhood), **Review 
 
 ## Data source
 
-Historical snapshot of Tasmanian short-term rental listings, **January 2020**. Occupancy and revenue are estimated from listing calendar availability.
-
-_(Add the dataset name and link here if you can share it.)_
+Airbnb short-term rental data for Tasmania — a **January 2020** snapshot supplied as a structured, multi-table dataset. Seven linked tables cover listings, hosts, availability, costs, features, location, and reviews. Occupancy and revenue are estimated from listing calendar availability. Built as a postgraduate data-visualisation project.
 
 ## How to open
 
