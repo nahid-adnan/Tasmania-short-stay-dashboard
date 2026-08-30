@@ -1,59 +1,125 @@
-# Tasmania Short-Stay Dashboard
+<div align="center">
 
-Interactive **Power BI** dashboard analysing Tasmania's short-stay (short-term rental) market — market overview, pricing & revenue, host and guest experience, and a listing-level explorer.
+# 🏝️ Tasmania Short-Stay Dashboard
+
+### Interactive **Power BI** analysis of Tasmania's short-term rental market
+
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![DAX](https://img.shields.io/badge/DAX-01A88D?style=for-the-badge&logoColor=white)
+![Data Visualisation](https://img.shields.io/badge/Data%20Visualisation-4B8BBE?style=for-the-badge&logo=chartdotjs&logoColor=white)
+![Status](https://img.shields.io/badge/Project-Portfolio-success?style=for-the-badge)
+
+</div>
+
+<div align="center">
 
 <!-- Crop your screenshot to just the report canvas, name it dashboard-preview.png, and upload it -->
 ![Dashboard preview](dashboard-preview.png)
 
-## Overview
+<sub><i>Market overview page — Tasmania short-stay market, January 2020</i></sub>
 
-This report explores the Tasmanian short-term rental market from four angles: how the market is structured, how listings are priced and how much revenue they generate, how hosts and guest ratings compare, and how individual listings perform. It combines KPI cards, charts, a geographic map, slicers, and bookmark-driven navigation, plus a what-if price scenario for revenue modelling.
+</div>
 
-## Key figures (January 2020 snapshot, all of Tasmania)
+---
 
-- **5,293** listings
-- **$149** median nightly price
-- **44.6%** estimated occupancy
-- **$145.3M** estimated annual revenue
-- **$27,459** estimated revenue per listing
+## 📊 Overview
 
-## Report pages
+This report explores the Tasmanian short-term rental market from four angles: how the market is **structured**, how listings are **priced** and how much **revenue** they generate, how **hosts and guest ratings** compare, and how **individual listings** perform.
 
-1. **Market overview** — headline KPIs (listings, median nightly price, estimated occupancy, estimated revenue) with filters for tourism region, room type, property type, price band, and host status; a map of estimated 12-month revenue by local government area; average nightly rate and estimated occupancy vs 30-day availability by region; and a price-vs-rating scatter (bubble size = listing count).
-2. **Pricing & revenue** — average effective nightly rate, median nightly price, median price per guest, estimated revenue per listing, RevPAN, occupancy and 30-day availability, broken down by price band. Includes a **price scenario** control that models revenue uplift ($ and %) and scenario annual revenue.
-3. **Hosts & guest experience** — average guest rating, superhost status and share, host experience and segments, review sub-scores and shortfalls, and rating-tier thresholds (e.g. listings above a chosen rating bar).
-4. **Listing explorer** — a filterable, listing-level table with room type, property category, capacity, amenity band, occupancy, revenue, and performance/status flags for drilling into individual properties.
-5. **Area snapshot** — a tooltip page giving a quick regional summary on hover.
+It combines KPI cards, charts, a geographic map, slicers, and bookmark-driven navigation, plus a **what-if price scenario** for revenue modelling.
 
-## Key measures
+---
 
-Revenue & pricing: Estimated Annual Revenue · Estimated Revenue per Listing · Avg Effective Nightly Rate · Median Nightly Price · Median Price per Guest · Avg RevPAN · Estimated Occupancy Rate · Availability Rate (30 Days) · Revenue Uplift ($ / %) · Scenario Annual Revenue
+## 🔢 Key Figures
 
-Market & hosts: Total Listings · Host Base · New Hosts · New Hosts YoY % · Cumulative Hosts · Superhost Share · Professionally Managed Share
+<div align="center">
 
-Guest experience: Avg Guest Rating · Avg Sub-score · Sub-score Shortfall · Listings Above Rating Bar
+| 🏠 Listings | 💵 Median Price | 📅 Est. Occupancy | 💰 Est. Revenue | 📈 Revenue / Listing |
+|:---:|:---:|:---:|:---:|:---:|
+| **5,293** | **$149** | **44.6%** | **$145.3M** | **$27,459** |
 
-## Data model
+<sub><i>All of Tasmania · January 2020 snapshot</i></sub>
 
-Tables: **Listing**, **Host**, **Geography** (Region / Neighbourhood), **Review Score**, **Date**, plus helper tables for **Price Scenario**, **Rating Threshold**, and **Funnel Stage** that drive the what-if and threshold controls.
+</div>
 
-## Tools & techniques
+---
 
-- **Power BI Desktop** — data modelling and report design
-- **DAX** — measures for pricing, revenue, occupancy, and host metrics
-- **What-if parameter** — price scenario modelling with dynamic revenue uplift
-- Bookmarks and buttons for page navigation, a custom tooltip page, a map visual, and dynamic KPI context text
+## 📄 Report Pages
 
-## Data source
+| # | Page | What it shows |
+|:---:|:---|:---|
+| 1 | 🗺️ **Market overview** | Headline KPIs, a map of estimated 12-month revenue by local government area, average nightly rate & occupancy vs 30-day availability by region, and a price-vs-rating scatter |
+| 2 | 💰 **Pricing & revenue** | Effective nightly rate, RevPAN, occupancy, and revenue per listing by price band — with a **price-scenario control** modelling revenue uplift |
+| 3 | ⭐ **Hosts & guest experience** | Guest ratings, superhost status & share, review sub-scores and shortfalls, and rating-tier thresholds |
+| 4 | 🔎 **Listing explorer** | A filterable, listing-level table with room type, capacity, occupancy, revenue, and performance flags |
+| 5 | 🧭 **Area snapshot** | A tooltip page giving a quick regional summary on hover |
 
-Airbnb short-term rental data for Tasmania — a **January 2020** snapshot supplied as a structured, multi-table dataset. Seven linked tables cover listings, hosts, availability, costs, features, location, and reviews. Occupancy and revenue are estimated from listing calendar availability. Built as a postgraduate data-visualisation project.
+<!-- Optional: add more screenshots as you capture them
+<div align="center">
+  <img src="pricing-revenue.png"   width="80%" />
+  <img src="hosts-experience.png"  width="80%" />
+  <img src="listing-explorer.png"  width="80%" />
+</div>
+-->
 
-## How to open
+---
 
-1. Download `TasmaniaShortStay.pbix`.
-2. Open it in **Power BI Desktop** (free from Microsoft).
+## 🧮 Key Measures
 
-## Author
+| Category | Measures |
+|:---|:---|
+| **Revenue & pricing** | Estimated Annual Revenue · Estimated Revenue per Listing · Avg Effective Nightly Rate · Median Nightly Price · Median Price per Guest · Avg RevPAN · Estimated Occupancy Rate · Availability Rate (30 Days) · Revenue Uplift ($ / %) · Scenario Annual Revenue |
+| **Market & hosts** | Total Listings · Host Base · New Hosts · New Hosts YoY % · Cumulative Hosts · Superhost Share · Professionally Managed Share |
+| **Guest experience** | Avg Guest Rating · Avg Sub-score · Sub-score Shortfall · Listings Above Rating Bar |
 
-**B M Nahid Hasan Adnan** — Master of Data Science student, James Cook University
-GitHub: [@nahid-adnan](https://github.com/nahid-adnan)
+---
+
+## 🗂️ Data Model
+
+| Table | Role |
+|:---|:---|
+| **Listing** | Core listing records — the grain of the model |
+| **Host** | Host attributes and segments |
+| **Geography** | Region / neighbourhood, used for the map and regional breakdowns |
+| **Review Score** | Guest ratings and sub-scores |
+| **Date** | Time context |
+| **Price Scenario** ⚙️ | Helper table driving the what-if price control |
+| **Rating Threshold** ⚙️ | Helper table for the rating-bar filter |
+| **Funnel Stage** ⚙️ | Helper table for stage-based views |
+
+---
+
+## 🛠️ Tools & Techniques
+
+- 🟡 **Power BI Desktop** — data modelling and report design
+- 🧮 **DAX** — measures for pricing, revenue, occupancy, and host metrics
+- 🎚️ **What-if parameter** — price-scenario modelling with dynamic revenue uplift
+- 🔖 **Bookmarks & buttons** — page navigation, a custom tooltip page, a map visual, and dynamic KPI context text
+
+---
+
+## 📁 Data Source
+
+Airbnb short-term rental data for **Tasmania** — a **January 2020** snapshot supplied as a structured, multi-table dataset. Seven linked tables cover listings, hosts, availability, costs, features, location, and reviews. Occupancy and revenue are **estimated from listing calendar availability**. Built as a postgraduate data-visualisation project.
+
+---
+
+## 🚀 How to Open
+
+```text
+1. Download  TasmaniaShortStay.pbix
+2. Open it in Power BI Desktop (free from Microsoft)
+```
+
+---
+
+<div align="center">
+
+### 👤 Author
+
+**B M Nahid Hasan Adnan**
+Master of Data Science student · James Cook University
+
+[![GitHub](https://img.shields.io/badge/GitHub-@nahid--adnan-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nahid-adnan)
+
+</div>
