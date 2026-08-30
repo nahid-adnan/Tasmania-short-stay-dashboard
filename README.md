@@ -4,6 +4,8 @@ Interactive **Power BI** dashboard analysing Tasmania's short-stay (short-term r
 
 <!-- Crop your screenshot to just the report canvas, name it dashboard-preview.png, and upload it -->
 ![Dashboard preview](dashboard-preview.png)
+<img width="1882" height="1170" alt="dashboard-preview png" src="https://github.com/user-attachments/assets/bedbbc0f-2965-45cd-a265-d8df70c6cf13" />
+
 
 ## Overview
 
