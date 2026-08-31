@@ -15,7 +15,7 @@
 
 <div align="center">
 
-![Market overview](images/01-market-overview.png)
+![Market overview](01-market-overview.png)
 
 </div>
 
@@ -49,7 +49,7 @@ It pairs KPI cards with a geographic map, distribution and comparison charts, a 
 
 ### 1️⃣ 🗺️ Market Overview — *where the supply sits*
 
-![Market overview](images/01-market-overview.png)
+![Market overview](01-market-overview.png)
 
 Headline KPIs above a bubble map of estimated 12-month revenue by local government area. Regional rate rankings show **Bass Strait Islands ($200)** and the **East Coast ($190)** leading on price, while estimated occupancy peaks in the south (**Hobart & South, 51.6%**). A price-vs-rating scatter tests whether higher prices buy better reviews — they broadly don't.
 
@@ -59,7 +59,7 @@ Headline KPIs above a bubble map of estimated 12-month revenue by local governme
 
 ### 2️⃣ 💰 Pricing & Revenue — *rate architecture and a repricing what-if*
 
-![Pricing and revenue](images/02-pricing-revenue.png)
+![Pricing and revenue](02-pricing-revenue.png)
 
 Moves from the advertised rate to what a guest actually pays: the **3-night effective rate of $191** folds in a $41 cleaning fee, adding **6.0%** to the average nightly rate. A right-skewed price histogram shows half of all listings between **$100 and $200**, alongside median rate and stock composition by property class (houses & townhouses dominate at **2,442** listings).
 
@@ -69,7 +69,7 @@ A regional × price-band occupancy matrix shows budget listings out-occupying mi
 
 ### 3️⃣ ⭐ Hosts & Guest Experience — *who runs the stock*
 
-![Hosts and guest experience](images/03-hosts-guest-experience.png)
+![Hosts and guest experience](03-hosts-guest-experience.png)
 
 **3,371 hosts** hold the 5,293 listings (1.57 each), with **49.1%** of listings run by superhosts and **20.9%** professionally managed. The counter-intuitive finding: **larger portfolios ask more but rate lower** — professional managers charge a median **$180** vs **$142** for individual hosts, yet occupancy and rating tiers both slip as portfolio size grows.
 
@@ -81,7 +81,7 @@ Sub-score analysis isolates **value for money (0.36 off a perfect 10)** as the w
 
 ### 4️⃣ 🔎 Listing Explorer — *listing-level detail*
 
-![Listing explorer](images/04-listing-explorer.png)
+![Listing explorer](04-listing-explorer.png)
 
 The **drill-through target** from any region on page 1. A funnel narrows 5,293 listings to the **4,775** that clear a user-set quality bar and the **3,824** reviewed recently. Yield by amenity count flattens quickly (RevPAN peaks around **$79**), while median rate climbs steeply with sleeping capacity — from **$115** for couples to **$240** for large groups.
 
@@ -93,7 +93,7 @@ The sortable listing register sits below, with a data-quality filter isolating *
 
 <div align="center">
 
-![Area snapshot tooltip](images/05-area-snapshot.png)
+![Area snapshot tooltip](05-area-snapshot.png)
 
 </div>
 
