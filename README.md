@@ -1,22 +1,21 @@
 <div align="center">
 
-# 🏝️ Tasmania Short-Stay Dashboard
+# 🏝️ Tasmania Short-Stay Market Intelligence
 
-### Interactive **Power BI** analysis of Tasmania's short-term rental market
+### An interactive **Power BI** dashboard on Tasmania's short-term rental market
+*Where the supply sits, what it charges, and how much of its calendar is committed*
 
 ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 ![DAX](https://img.shields.io/badge/DAX-01A88D?style=for-the-badge&logoColor=white)
-![Data Visualisation](https://img.shields.io/badge/Data%20Visualisation-4B8BBE?style=for-the-badge&logo=chartdotjs&logoColor=white)
-![Status](https://img.shields.io/badge/Project-Portfolio-success?style=for-the-badge)
+![Data Modelling](https://img.shields.io/badge/Data%20Modelling-4B8BBE?style=for-the-badge&logo=databricks&logoColor=white)
+![Pages](https://img.shields.io/badge/Report%20Pages-5-blue?style=for-the-badge)
+![Listings](https://img.shields.io/badge/Listings-5%2C293-success?style=for-the-badge)
 
 </div>
 
 <div align="center">
 
-<!-- Crop your screenshot to just the report canvas, name it dashboard-preview.png, and upload it -->
-![Dashboard preview](dashboard-preview.png)
-
-<sub><i>Market overview page — Tasmania short-stay market, January 2020</i></sub>
+![Market overview](images/01-market-overview.png)
 
 </div>
 
@@ -24,9 +23,11 @@
 
 ## 📊 Overview
 
-This report explores the Tasmanian short-term rental market from four angles: how the market is **structured**, how listings are **priced** and how much **revenue** they generate, how **hosts and guest ratings** compare, and how **individual listings** perform.
+This report examines Tasmania's short-term rental market from four angles: how the market is **structured**, how listings are **priced** and what they yield, **who runs the stock** and how guest experience varies, and how **individual listings** perform.
 
-It combines KPI cards, charts, a geographic map, slicers, and bookmark-driven navigation, plus a **what-if price scenario** for revenue modelling.
+It pairs KPI cards with a geographic map, distribution and comparison charts, a drill-through register, and a hover tooltip — plus a **what-if repricing scenario** for revenue modelling.
+
+> ⚠️ **On the estimates:** occupancy is *inferred from unbooked calendar nights*, not confirmed bookings, so every revenue figure is an upper bound and labelled *Est.* The repricing scenario uses an **assumed −0.6 price elasticity** — it is illustrative, not a forecast.
 
 ---
 
@@ -44,23 +45,74 @@ It combines KPI cards, charts, a geographic map, slicers, and bookmark-driven na
 
 ---
 
-## 📄 Report Pages
+## 📄 The Five Pages
 
-| # | Page | What it shows |
-|:---:|:---|:---|
-| 1 | 🗺️ **Market overview** | Headline KPIs, a map of estimated 12-month revenue by local government area, average nightly rate & occupancy vs 30-day availability by region, and a price-vs-rating scatter |
-| 2 | 💰 **Pricing & revenue** | Effective nightly rate, RevPAN, occupancy, and revenue per listing by price band — with a **price-scenario control** modelling revenue uplift |
-| 3 | ⭐ **Hosts & guest experience** | Guest ratings, superhost status & share, review sub-scores and shortfalls, and rating-tier thresholds |
-| 4 | 🔎 **Listing explorer** | A filterable, listing-level table with room type, capacity, occupancy, revenue, and performance flags |
-| 5 | 🧭 **Area snapshot** | A tooltip page giving a quick regional summary on hover |
+### 1️⃣ 🗺️ Market Overview — *where the supply sits*
 
-<!-- Optional: add more screenshots as you capture them
+![Market overview](images/01-market-overview.png)
+
+Headline KPIs above a bubble map of estimated 12-month revenue by local government area. Regional rate rankings show **Bass Strait Islands ($200)** and the **East Coast ($190)** leading on price, while estimated occupancy peaks in the south (**Hobart & South, 51.6%**). A price-vs-rating scatter tests whether higher prices buy better reviews — they broadly don't.
+
+**Filters:** tourism region · room type · property type · price band · host status
+
+---
+
+### 2️⃣ 💰 Pricing & Revenue — *rate architecture and a repricing what-if*
+
+![Pricing and revenue](images/02-pricing-revenue.png)
+
+Moves from the advertised rate to what a guest actually pays: the **3-night effective rate of $191** folds in a $41 cleaning fee, adding **6.0%** to the average nightly rate. A right-skewed price histogram shows half of all listings between **$100 and $200**, alongside median rate and stock composition by property class (houses & townhouses dominate at **2,442** listings).
+
+A regional × price-band occupancy matrix shows budget listings out-occupying mid-market in five of six regions, and the **repricing slider** drives a baseline-vs-scenario revenue comparison.
+
+---
+
+### 3️⃣ ⭐ Hosts & Guest Experience — *who runs the stock*
+
+![Hosts and guest experience](images/03-hosts-guest-experience.png)
+
+**3,371 hosts** hold the 5,293 listings (1.57 each), with **49.1%** of listings run by superhosts and **20.9%** professionally managed. The counter-intuitive finding: **larger portfolios ask more but rate lower** — professional managers charge a median **$180** vs **$142** for individual hosts, yet occupancy and rating tiers both slip as portfolio size grows.
+
+Sub-score analysis isolates **value for money (0.36 off a perfect 10)** as the weakest dimension market-wide. Host entry peaked in **2016**.
+
+<sub><b>Superhost effect:</b> +2.9 rating points · +2.5% est. occupancy · −6.9% on median rate</sub>
+
+---
+
+### 4️⃣ 🔎 Listing Explorer — *listing-level detail*
+
+![Listing explorer](images/04-listing-explorer.png)
+
+The **drill-through target** from any region on page 1. A funnel narrows 5,293 listings to the **4,775** that clear a user-set quality bar and the **3,824** reviewed recently. Yield by amenity count flattens quickly (RevPAN peaks around **$79**), while median rate climbs steeply with sleeping capacity — from **$115** for couples to **$240** for large groups.
+
+The sortable listing register sits below, with a data-quality filter isolating **32 listings** whose bed or price values aren't credible.
+
+---
+
+### 5️⃣ 🧭 Area Snapshot — *tooltip page*
+
 <div align="center">
-  <img src="pricing-revenue.png"   width="80%" />
-  <img src="hosts-experience.png"  width="80%" />
-  <img src="listing-explorer.png"  width="80%" />
+
+![Area snapshot tooltip](images/05-area-snapshot.png)
+
 </div>
--->
+
+A hover tooltip surfacing listings, median price, estimated occupancy, rating, and room-type mix for any area — context without leaving the page.
+
+---
+
+## 🖱️ Interactivity
+
+| Element | Where it's used |
+|:---|:---|
+| 🎛️ **Slicers & filters** | Region, room type, property class, price band, host status, guest capacity, review recency, data quality |
+| 🎚️ **What-if parameters** | Repricing scenario (revenue uplift) · quality-bar threshold |
+| 🔀 **Drill-through** | Right-click a region on Market Overview → Listing Explorer |
+| 🔎 **Drill-down** | Regional rate chart opens to area level |
+| 💬 **Custom tooltip** | Area Snapshot page on hover |
+| 🔖 **Bookmarks & buttons** | Page navigation |
+| ↔️ **Cross-filtering** | Between visuals on every page |
+| 📝 **Dynamic context text** | KPI subtitles and footer summaries respond to filters |
 
 ---
 
@@ -79,22 +131,24 @@ It combines KPI cards, charts, a geographic map, slicers, and bookmark-driven na
 | Table | Role |
 |:---|:---|
 | **Listing** | Core listing records — the grain of the model |
-| **Host** | Host attributes and segments |
-| **Geography** | Region / neighbourhood, used for the map and regional breakdowns |
+| **Host** | Host attributes, tenure, and portfolio segments |
+| **Geography** | Region / neighbourhood — drives the map and regional breakdowns |
 | **Review Score** | Guest ratings and sub-scores |
 | **Date** | Time context |
-| **Price Scenario** ⚙️ | Helper table driving the what-if price control |
-| **Rating Threshold** ⚙️ | Helper table for the rating-bar filter |
-| **Funnel Stage** ⚙️ | Helper table for stage-based views |
+| ⚙️ **Price Scenario** | Disconnected helper table driving the repricing what-if |
+| ⚙️ **Rating Threshold** | Helper table for the quality-bar filter |
+| ⚙️ **Funnel Stage** | Helper table for the listing funnel |
 
 ---
 
 ## 🛠️ Tools & Techniques
 
 - 🟡 **Power BI Desktop** — data modelling and report design
-- 🧮 **DAX** — measures for pricing, revenue, occupancy, and host metrics
-- 🎚️ **What-if parameter** — price-scenario modelling with dynamic revenue uplift
-- 🔖 **Bookmarks & buttons** — page navigation, a custom tooltip page, a map visual, and dynamic KPI context text
+- 🧮 **DAX** — measures for pricing, revenue, occupancy, host, and rating metrics
+- 🎚️ **What-if parameters** — repricing scenario with dynamic revenue uplift; adjustable quality threshold
+- 🔀 **Drill-through & drill-down** — region → listing-level detail
+- 🔖 **Bookmarks, buttons, and a custom tooltip page**
+- 📝 **Dynamic titles and context text** driven by measures
 
 ---
 
