@@ -15,9 +15,8 @@
 
 <div align="center">
 
-<img width="1071" height="824" alt="01-market-overview" src="https://github.com/user-attachments/assets/0ec381ee-0b4d-4700-b0fb-2692266395c1" />
-
-
+![Market overview](<img width="1071" height="824" alt="01-market-overview" src="https://github.com/user-attachments/assets/c957c91b-52fa-46ff-b553-13d9929d3aee" />
+)
 
 </div>
 
