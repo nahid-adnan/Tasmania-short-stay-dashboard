@@ -17,6 +17,8 @@
 
 ![Market overview](images/01-market-overview.png)
 
+<img width="1071" height="824" alt="01-market-overview" src="https://github.com/user-attachments/assets/0ec381ee-0b4d-4700-b0fb-2692266395c1" />
+
 </div>
 
 ---
