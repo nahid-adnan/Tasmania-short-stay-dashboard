@@ -1,9 +1,10 @@
-<div align="center">
+<h1 align="center">🏝️ Tasmania Short-Stay Market Intelligence</h1>
 
-# 🏝️ Tasmania Short-Stay Market Intelligence
+<h3 align="center">An interactive Power BI dashboard on Tasmania's short-term rental market</h3>
 
-### An interactive **Power BI** dashboard on Tasmania's short-term rental market
-*Where the supply sits, what it charges, and how much of its calendar is committed*
+<p align="center"><i>Where the supply sits, what it charges, and how much of its calendar is committed</i></p>
+
+<p align="center">
 
 ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 ![DAX](https://img.shields.io/badge/DAX-01A88D?style=for-the-badge&logoColor=white)
@@ -11,13 +12,11 @@
 ![Pages](https://img.shields.io/badge/Report%20Pages-5-blue?style=for-the-badge)
 ![Listings](https://img.shields.io/badge/Listings-5%2C293-success?style=for-the-badge)
 
-</div>
+</p>
 
-<div align="center">
-
-![Market overview](01-market-overview.png)
-
-</div>
+<p align="center">
+  <img src="01-market-overview.png" width="900" alt="Market overview page" />
+</p>
 
 ---
 
@@ -33,15 +32,11 @@ It pairs KPI cards with a geographic map, distribution and comparison charts, a 
 
 ## 🔢 Key Figures
 
-<div align="center">
-
 | 🏠 Listings | 💵 Median Price | 📅 Est. Occupancy | 💰 Est. Revenue | 📈 Revenue / Listing |
 |:---:|:---:|:---:|:---:|:---:|
 | **5,293** | **$149** | **44.6%** | **$145.3M** | **$27,459** |
 
 <sub><i>All of Tasmania · January 2020 snapshot</i></sub>
-
-</div>
 
 ---
 
@@ -91,11 +86,9 @@ The sortable listing register sits below, with a data-quality filter isolating *
 
 ### 5️⃣ 🧭 Area Snapshot — *tooltip page*
 
-<div align="center">
-
-![Area snapshot tooltip](05-area-snapshot.png)
-
-</div>
+<p align="center">
+  <img src="05-area-snapshot.png" width="480" alt="Area snapshot tooltip" />
+</p>
 
 A hover tooltip surfacing listings, median price, estimated occupancy, rating, and room-type mix for any area — context without leaving the page.
 
@@ -167,13 +160,13 @@ Airbnb short-term rental data for **Tasmania** — a **January 2020** snapshot s
 
 ---
 
-<div align="center">
+<h3 align="center">👤 Author</h3>
 
-### 👤 Author
+<p align="center">
 
-**B M Nahid Hasan Adnan**
+**B M Nahid Hasan Adnan**<br>
 Master of Data Science student · James Cook University
 
-[![GitHub](https://img.shields.io/badge/GitHub-@nahid--adnan-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nahid-adnan)
+<a href="https://github.com/nahid-adnan"><img src="https://img.shields.io/badge/GitHub-@nahid--adnan-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
 
-</div>
+</p>
