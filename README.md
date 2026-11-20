@@ -20,19 +20,21 @@
 
 ---
 
+[Model diagram and relationships](model.md) · [80 DAX measures](measures.dax) · [Power Query transformations](power-query.pq) · [Calculated columns and tables](calculated-fields.md)
+
 ## 📊 Overview
 
 This report examines Tasmania's short-term rental market from four angles: how the market is **structured**, how listings are **priced** and what they yield, **who runs the stock** and how guest experience varies, and how **individual listings** perform.
 
 It pairs KPI cards with a geographic map, distribution and comparison charts, a drill-through register, and a hover tooltip — plus a **what-if repricing scenario** for revenue modelling.
 
-> ⚠️ **On the estimates:** occupancy is *inferred from unbooked calendar nights*, not confirmed bookings, so every revenue figure is an upper bound and labelled *Est.* The repricing scenario uses an **assumed −0.6 price elasticity** — it is illustrative, not a forecast.
+> **What the calendar measures.** The report calculates unavailable nights as 365 minus available nights. The 44.6% headline averages that share across listings. Some nights may be blocked by owners. Multiplying unavailable nights by each listing’s advertised nightly price and summing gives the A$145.3 million annual revenue scenario. Actual bookings, discounts and paid rates are unknown. The repricing slider assumes a demand elasticity of −0.6.
 
 ---
 
 ## 🔢 Key Figures
 
-| 🏠 Listings | 💵 Median Price | 📅 Est. Occupancy | 💰 Est. Revenue | 📈 Revenue / Listing |
+| 🏠 Listings | 💵 Median Price | 📅 Unavailable nights | 💰 Annual revenue scenario | 📈 Scenario / listing |
 |:---:|:---:|:---:|:---:|:---:|
 | **5,293** | **$149** | **44.6%** | **$145.3M** | **$27,459** |
 
@@ -56,7 +58,7 @@ Headline KPIs above a bubble map of estimated 12-month revenue by local governme
 
 ![Pricing and revenue](02-pricing-revenue.png)
 
-Moves from the advertised rate to what a guest actually pays: the **3-night effective rate of $191** folds in a $41 cleaning fee, adding **6.0%** to the average nightly rate. A right-skewed price histogram shows half of all listings between **$100 and $200**, alongside median rate and stock composition by property class (houses & townhouses dominate at **2,442** listings).
+Moves from the advertised rate to a modelled three-night stay including cleaning: the **3-night effective rate of $191** folds in a $41 cleaning fee, adding **6.0%** to the average nightly rate. A right-skewed price histogram shows half of all listings between **$100 and $200**, alongside median rate and stock composition by property class (houses & townhouses dominate at **2,442** listings).
 
 A regional × price-band occupancy matrix shows budget listings out-occupying mid-market in five of six regions, and the **repricing slider** drives a baseline-vs-scenario revenue comparison.
 
@@ -70,7 +72,7 @@ A regional × price-band occupancy matrix shows budget listings out-occupying mi
 
 Sub-score analysis isolates **value for money (0.36 off a perfect 10)** as the weakest dimension market-wide. Host entry peaked in **2016**.
 
-<sub><b>Superhost effect:</b> +2.9 rating points · +2.5% est. occupancy · −6.9% on median rate</sub>
+<sub><b>Superhost group differences:</b> +2.9 rating points · +2.5% est. occupancy · −6.9% on median rate</sub>
 
 ---
 
@@ -121,6 +123,8 @@ A hover tooltip surfacing listings, median price, estimated occupancy, rating, a
 
 ## 🗂️ Data Model
 
+![Relationships in the published Tasmania model](model.png)
+
 | Table | Role |
 |:---|:---|
 | **Listing** | Core listing records — the grain of the model |
@@ -147,16 +151,15 @@ A hover tooltip surfacing listings, median price, estimated occupancy, rating, a
 
 ## 📁 Data Source
 
-Airbnb short-term rental data for **Tasmania** — a **January 2020** snapshot supplied as a structured, multi-table dataset. Seven linked tables cover listings, hosts, availability, costs, features, location, and reviews. Occupancy and revenue are **estimated from listing calendar availability**. Built as a postgraduate data-visualisation project.
+Seven course-supplied Excel workbooks describe Tasmania Airbnb listings in January 2020. The files cover hosts, listings, availability, costs, features, location and reviews. The upstream publisher and collection method have not been verified. The snapshot supports historical comparisons.
 
 ---
 
 ## 🚀 How to Open
 
-```text
-1. Download  TasmaniaShortStay.pbix
-2. Open it in Power BI Desktop (free from Microsoft)
-```
+1. Download [TasmaniaShortStay.pbix](TasmaniaShortStay.pbix) and open it in Power BI Desktop. The saved data is available for exploration.
+2. To refresh from source, set `SourceFolder` under **Home → Transform data → Edit parameters** to a local folder containing the seven original workbooks. Apply and choose **Refresh**. The public repository includes the query definitions and cached report. The original course workbooks are required for an independent source refresh.
+3. See [Power Query](power-query.pq) for the exact filenames and sheet transformations.
 
 ---
 

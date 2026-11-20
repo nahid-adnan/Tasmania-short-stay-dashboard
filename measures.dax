@@ -1,0 +1,318 @@
+// Measures from the published Power BI model. Run this query in DAX Query View.
+DEFINE
+    MEASURE 'Listing'[Total Listings] = COUNTROWS ( 'Listing' )
+
+    MEASURE 'Listing'[Hosts in View] = DISTINCTCOUNT ( 'Listing'[Host ID] )
+
+    MEASURE 'Listing'[Listings per Host] = DIVIDE ( [Total Listings], [Hosts in View] )
+
+    MEASURE 'Listing'[Market Share %] = DIVIDE ( [Total Listings], CALCULATE ( [Total Listings], ALLSELECTED () ) )
+
+    MEASURE 'Listing'[Entire Home Share] = DIVIDE ( CALCULATE ( [Total Listings], 'Listing'[Room Type] = "Entire home/apt" ), [Total Listings] )
+
+    MEASURE 'Listing'[Superhost Share] = DIVIDE ( CALCULATE ( [Total Listings], 'Host'[Superhost Status] = "Superhost" ), [Total Listings] )
+
+    MEASURE 'Listing'[Superhost Share of Hosts] = DIVIDE (
+    CALCULATE (
+        DISTINCTCOUNT ( 'Host'[Host ID] ),
+        'Host'[Superhost Status] = "Superhost"
+    ),
+    DISTINCTCOUNT ( 'Host'[Host ID] )
+)
+
+    MEASURE 'Listing'[Professionally Managed Share] = DIVIDE ( CALCULATE ( [Total Listings], 'Host'[Host Segment] = "Professional manager (5+)" ), [Total Listings] )
+
+    MEASURE 'Listing'[Median Nightly Price] = MEDIANX ( 'Listing', 'Listing'[Nightly Price] )
+
+    MEASURE 'Listing'[Avg Nightly Price] = AVERAGE ( 'Listing'[Nightly Price] )
+
+    MEASURE 'Listing'[Median Price per Guest] = MEDIANX ( 'Listing', 'Listing'[Price per Guest] )
+
+    MEASURE 'Listing'[Avg Cleaning Fee] = AVERAGE ( 'Listing'[Cleaning Fee] )
+
+    MEASURE 'Listing'[Avg Effective Nightly Rate] = AVERAGEX ( 'Listing', 'Listing'[Effective Nightly Rate] )
+
+    MEASURE 'Listing'[Cleaning Fee Load %] = DIVIDE ( AVERAGEX ( 'Listing', DIVIDE ( COALESCE ( 'Listing'[Cleaning Fee], 0 ), 3 ) ), [Avg Nightly Price] )
+
+    MEASURE 'Listing'[Price Index vs Market] = DIVIDE (
+    [Median Nightly Price],
+    CALCULATE ( [Median Nightly Price], ALLSELECTED ( 'Geography' ) )
+)
+
+    MEASURE 'Listing'[Est. Occupancy Rate] = AVERAGEX ( 'Listing', 'Listing'[Occupancy Rate] )
+
+    MEASURE 'Listing'[Est. Booked Nights] = SUMX ( 'Listing', 'Listing'[Booked Nights] )
+
+    MEASURE 'Listing'[Est. Annual Revenue] = SUMX ( 'Listing', 'Listing'[Annual Revenue] )
+
+    MEASURE 'Listing'[Est. Revenue per Listing] = DIVIDE ( [Est. Annual Revenue], [Total Listings] )
+
+    MEASURE 'Listing'[Avg RevPAN] = AVERAGEX ( 'Listing', 'Listing'[RevPAN] )
+
+    MEASURE 'Listing'[Revenue Share %] = DIVIDE ( [Est. Annual Revenue], CALCULATE ( [Est. Annual Revenue], ALLSELECTED () ) )
+
+    MEASURE 'Listing'[Availability Rate 30 Days] = DIVIDE ( AVERAGE ( 'Listing'[Available Nights 30] ), 30 )
+
+    MEASURE 'Listing'[Near-term Demand Index] = 1 - DIVIDE ( AVERAGE ( 'Listing'[Available Nights 30] ), 30 )
+
+    MEASURE 'Listing'[Occupancy vs Market (pp)] = [Est. Occupancy Rate]
+    - CALCULATE ( [Est. Occupancy Rate], ALLSELECTED ( 'Geography' ) )
+
+    MEASURE 'Listing'[Avg Latitude] = AVERAGE ( 'Listing'[Latitude] )
+
+    MEASURE 'Listing'[Avg Longitude] = AVERAGE ( 'Listing'[Longitude] )
+
+    MEASURE 'Listing'[Avg Guest Rating] = AVERAGE ( 'Listing'[Guest Rating] )
+
+    MEASURE 'Listing'[Rated Listings] = CALCULATE ( [Total Listings], NOT ISBLANK ( 'Listing'[Guest Rating] ) )
+
+    MEASURE 'Listing'[Avg Reviews per Month] = AVERAGE ( 'Listing'[Reviews per Month] )
+
+    MEASURE 'Listing'[Total Reviews] = SUM ( 'Listing'[Number of Reviews] )
+
+    MEASURE 'Listing'[Avg Amenity Count] = AVERAGE ( 'Listing'[Amenity Count] )
+
+    MEASURE 'Listing'[Score - Accuracy] = AVERAGE ( 'Listing'[Score Accuracy] )
+
+    MEASURE 'Listing'[Score - Cleanliness] = AVERAGE ( 'Listing'[Score Cleanliness] )
+
+    MEASURE 'Listing'[Score - Check-in] = AVERAGE ( 'Listing'[Score Check-in] )
+
+    MEASURE 'Listing'[Score - Communication] = AVERAGE ( 'Listing'[Score Communication] )
+
+    MEASURE 'Listing'[Score - Location] = AVERAGE ( 'Listing'[Score Location] )
+
+    MEASURE 'Listing'[Score - Value] = AVERAGE ( 'Listing'[Score Value] )
+
+    MEASURE 'Listing'[Avg Sub-score] = AVERAGE ( 'Review Score'[Score] )
+
+    MEASURE 'Listing'[Sub-score Shortfall] = 10 - [Avg Sub-score]
+
+    MEASURE 'Listing'[Superhost Rating Lift] = CALCULATE ( [Avg Guest Rating], 'Host'[Superhost Status] = "Superhost" )
+    - CALCULATE ( [Avg Guest Rating], 'Host'[Superhost Status] = "Standard host" )
+
+    MEASURE 'Listing'[Superhost Occupancy Lift] = CALCULATE ( [Est. Occupancy Rate], 'Host'[Superhost Status] = "Superhost" )
+    - CALCULATE ( [Est. Occupancy Rate], 'Host'[Superhost Status] = "Standard host" )
+
+    MEASURE 'Listing'[Superhost Price Premium %] = VAR SuperhostPrice = CALCULATE ( [Median Nightly Price], 'Host'[Superhost Status] = "Superhost" )
+VAR StandardPrice  = CALCULATE ( [Median Nightly Price], 'Host'[Superhost Status] = "Standard host" )
+RETURN
+    DIVIDE ( SuperhostPrice - StandardPrice, StandardPrice )
+
+    MEASURE 'Listing'[New Hosts] = CALCULATE ( COUNTROWS ( 'Host' ), CROSSFILTER ( 'Host'[Host ID], 'Listing'[Host ID], BOTH ) )
+
+    MEASURE 'Listing'[Cumulative Hosts] = CALCULATE (
+    COUNTROWS ( 'Host' ),
+    FILTER ( ALL ( 'Date' ), 'Date'[Date] <= MAX ( 'Date'[Date] ) ),
+    CROSSFILTER ( 'Host'[Host ID], 'Listing'[Host ID], BOTH )
+)
+
+    MEASURE 'Listing'[New Hosts YoY %] = VAR ThisYear = [New Hosts]
+VAR LastYear = CALCULATE ( [New Hosts], DATEADD ( 'Date'[Date], -1, YEAR ) )
+RETURN
+    DIVIDE ( ThisYear - LastYear, LastYear )
+
+    MEASURE 'Listing'[Price Change % Value] = SELECTEDVALUE ( 'Price Scenario'[Price Change %], 0 )
+
+    MEASURE 'Listing'[Demand Elasticity] = -0.6
+
+    MEASURE 'Listing'[Scenario Occupancy] = VAR Delta = [Price Change % Value]
+RETURN
+    AVERAGEX (
+        'Listing',
+        MIN ( 1, MAX ( 0, 'Listing'[Occupancy Rate] * ( 1 + [Demand Elasticity] * Delta ) ) )
+    )
+
+    MEASURE 'Listing'[Scenario Annual Revenue] = VAR Delta = [Price Change % Value]
+RETURN
+    SUMX (
+        'Listing',
+        'Listing'[Nightly Price] * ( 1 + Delta )
+            * 365
+            * MIN ( 1, MAX ( 0, 'Listing'[Occupancy Rate] * ( 1 + [Demand Elasticity] * Delta ) ) )
+    )
+
+    MEASURE 'Listing'[Revenue Uplift $] = [Scenario Annual Revenue] - [Est. Annual Revenue]
+
+    MEASURE 'Listing'[Revenue Uplift %] = DIVIDE ( [Revenue Uplift $], [Est. Annual Revenue] )
+
+    MEASURE 'Listing'[Minimum Guest Rating] = SELECTEDVALUE ( 'Rating Threshold'[Minimum Guest Rating], 80 )
+
+    MEASURE 'Listing'[Listings Above Rating Bar] = CALCULATE (
+    [Total Listings],
+    FILTER ( VALUES ( 'Listing'[Guest Rating] ), 'Listing'[Guest Rating] >= [Minimum Guest Rating] )
+)
+
+    MEASURE 'Listing'[Rating Bar Coverage %] = DIVIDE ( [Listings Above Rating Bar], [Rated Listings] )
+
+    MEASURE 'Listing'[State Listings] = CALCULATE ( [Total Listings], ALL ( 'Listing' ), ALL ( 'Geography' ), ALL ( 'Host' ) )
+
+    MEASURE 'Listing'[State Median Price] = CALCULATE ( [Median Nightly Price], ALL ( 'Listing' ), ALL ( 'Geography' ), ALL ( 'Host' ) )
+
+    MEASURE 'Listing'[State Occupancy] = CALCULATE ( [Est. Occupancy Rate], ALL ( 'Listing' ), ALL ( 'Geography' ), ALL ( 'Host' ) )
+
+    MEASURE 'Listing'[State Revenue] = CALCULATE ( [Est. Annual Revenue], ALL ( 'Listing' ), ALL ( 'Geography' ), ALL ( 'Host' ) )
+
+    MEASURE 'Listing'[State Rating] = CALCULATE ( [Avg Guest Rating], ALL ( 'Listing' ), ALL ( 'Geography' ), ALL ( 'Host' ) )
+
+    MEASURE 'Listing'[KPI Listings Context] = FORMAT ( DIVIDE ( [Total Listings], [State Listings] ), "0.0%" ) & " of all Tasmania"
+
+    MEASURE 'Listing'[KPI Price Context] = VAR Gap = [Median Nightly Price] - [State Median Price]
+RETURN
+    SWITCH (
+        TRUE (),
+        Gap > 0,  "▲ " & FORMAT ( Gap, "$#,##0" ) & " above the state median",
+        Gap < 0,  "▼ " & FORMAT ( -Gap, "$#,##0" ) & " below the state median",
+        "level with the state median"
+    )
+
+    MEASURE 'Listing'[KPI Occupancy Context] = VAR Gap = [Est. Occupancy Rate] - [State Occupancy]
+RETURN
+    SWITCH (
+        TRUE (),
+        Gap > 0.0005,  "▲ " & FORMAT ( Gap, "0.0%" ) & " above the state average",
+        Gap < -0.0005, "▼ " & FORMAT ( -Gap, "0.0%" ) & " below the state average",
+        "level with the state average"
+    )
+
+    MEASURE 'Listing'[KPI Revenue Context] = FORMAT ( DIVIDE ( [Est. Annual Revenue], [State Revenue] ), "0.0%" ) & " of state revenue"
+
+    MEASURE 'Listing'[KPI Rating Context] = VAR Gap = [Avg Guest Rating] - [State Rating]
+RETURN
+    SWITCH (
+        TRUE (),
+        Gap > 0.05,  "▲ " & FORMAT ( Gap, "0.0" ) & " points above state",
+        Gap < -0.05, "▼ " & FORMAT ( -Gap, "0.0" ) & " points below state",
+        "level with the state average"
+    )
+
+    MEASURE 'Listing'[KPI Hosts Context] = FORMAT ( [Listings per Host], "0.00" ) & " listings per host"
+
+    MEASURE 'Listing'[KPI Superhost Context] = FORMAT ( [Superhost Rating Lift], "+0.0;-0.0" ) & " rating points vs standard"
+
+    MEASURE 'Listing'[KPI Reviews Context] = FORMAT ( [Total Reviews], "#,##0" ) & " reviews all-time"
+
+    MEASURE 'Listing'[KPI Managed Context] = FORMAT ( CALCULATE ( [Hosts in View], 'Host'[Host Segment] = "Professional manager (5+)" ), "#,##0" )
+    & " operators with 5+ properties"
+
+    MEASURE 'Listing'[KPI Fee Context] = "assumes a 3-night stay; " & FORMAT ( [Avg Cleaning Fee], "$#,##0" ) & " cleaning fee"
+
+    MEASURE 'Listing'[KPI Scenario Context] = "modelled at " & FORMAT ( [Price Change % Value], "+0%;-0%;0%" ) & " repricing"
+
+    MEASURE 'Listing'[KPI Uplift Context] = VAR U = [Revenue Uplift $]
+RETURN
+    SWITCH (
+        TRUE (),
+        U > 0, "▲ " & FORMAT ( DIVIDE ( U, 1000000 ), "$0.0" ) & "M gained",
+        U < 0, "▼ " & FORMAT ( DIVIDE ( -U, 1000000 ), "$0.0" ) & "M lost",
+        "move the slider to model a change"
+    )
+
+    MEASURE 'Listing'[KPI Bar Context] = "quality bar set at " & FORMAT ( [Minimum Guest Rating], "0" )
+
+    MEASURE 'Listing'[KPI Yield Context] = FORMAT ( [Avg RevPAN], "$#,##0" ) & " revenue per available night"
+
+    MEASURE 'Listing'[Funnel Value] = VAR Bar = [Minimum Guest Rating]
+RETURN
+    SWITCH (
+        SELECTEDVALUE ( 'Funnel Stage'[Stage Order] ),
+        1, [Total Listings],
+        2, [Rated Listings],
+        3, CALCULATE (
+               [Total Listings],
+               FILTER ( VALUES ( 'Listing'[Guest Rating] ), 'Listing'[Guest Rating] >= Bar )
+           ),
+        4, CALCULATE (
+               [Total Listings],
+               FILTER ( VALUES ( 'Listing'[Guest Rating] ), 'Listing'[Guest Rating] >= Bar ),
+               'Listing'[Listing Status] = "Reviewed within 60 days"
+           ),
+        BLANK ()
+    )
+
+    MEASURE 'Listing'[Selection Context] = VAR Regions =
+    IF (
+        ISFILTERED ( 'Geography'[Region] ),
+        CONCATENATEX ( VALUES ( 'Geography'[Region] ), 'Geography'[Region], ", " ),
+        "all Tasmania"
+    )
+VAR Rooms =
+    IF (
+        ISFILTERED ( 'Listing'[Room Type] ),
+        CONCATENATEX ( VALUES ( 'Listing'[Room Type] ), 'Listing'[Room Type], ", " ),
+        "all room types"
+    )
+RETURN
+    Regions & "  |  " & Rooms
+
+    MEASURE 'Listing'[Market Insight] = VAR N        = [Total Listings]
+VAR MedPrice = [Median Nightly Price]
+VAR Occ      = [Est. Occupancy Rate]
+VAR RevEach  = [Est. Revenue per Listing]
+VAR TopArea =
+    CALCULATE (
+        CONCATENATEX (
+            TOPN ( 1, VALUES ( 'Geography'[Neighbourhood] ), [Est. Annual Revenue], DESC ),
+            'Geography'[Neighbourhood]
+        ),
+        ALLSELECTED ( 'Geography'[Neighbourhood] )
+    )
+RETURN
+    FORMAT ( N, "#,##0" ) & " listings  •  median " & FORMAT ( MedPrice, "$#,##0" ) & "/night"
+        & "  •  " & FORMAT ( Occ, "0.0%" ) & " est. occupancy"
+        & "  •  " & FORMAT ( RevEach, "$#,##0" ) & " est. revenue per listing"
+        & "  •  highest est. revenue: " & TopArea
+
+    MEASURE 'Listing'[Pricing Insight] = VAR Load    = [Cleaning Fee Load %]
+VAR Uplift  = [Revenue Uplift %]
+VAR Delta   = [Price Change % Value]
+VAR Verdict =
+    SWITCH (
+        TRUE (),
+        Delta = 0,  "move the price slider to model a repricing strategy",
+        Uplift > 0, "repricing " & FORMAT ( Delta, "+0%;-0%" ) & " lifts modelled revenue " & FORMAT ( Uplift, "+0.0%" ),
+        "repricing " & FORMAT ( Delta, "+0%;-0%" ) & " costs " & FORMAT ( Uplift, "0.0%" ) & " of modelled revenue"
+    )
+RETURN
+    "On an assumed three-night stay, cleaning fees add "
+        & FORMAT ( Load, "0.0%" ) & " to the average nightly rate  •  " & Verdict
+
+    MEASURE 'Listing'[Host Insight] = VAR RatingLift = [Superhost Rating Lift]
+VAR OccLift    = [Superhost Occupancy Lift]
+VAR PricePrem  = [Superhost Price Premium %]
+RETURN
+    "Superhosts: " & FORMAT ( RatingLift, "+0.0;-0.0" ) & " rating points"
+        & "  •  " & FORMAT ( OccLift, "+0.0%;-0.0%" ) & " est. occupancy"
+        & "  •  " & FORMAT ( PricePrem, "+0.0%;-0.0%" ) & " on median rate — associated with higher estimated occupancy at a lower rate"
+
+    MEASURE 'Listing'[Rating Colour] = SWITCH (
+    TRUE (),
+    [Avg Guest Rating] >= 98, "#1BAF7A",
+    [Avg Guest Rating] >= 95, "#2A78D6",
+    [Avg Guest Rating] >= 90, "#EDA100",
+    "#E34948"
+)
+
+    MEASURE 'Listing'[Listing Performance Flag] = // Occupancy vs Market and Price Index vs Market strip filters from Geography
+// only. On a row of the listing register the Listing ID filter therefore
+// survives, the "market" collapses to the single listing being measured,
+// and every row scores a gap of exactly 0 and an index of exactly 1.
+// ALLSELECTED () removes the filters the visual itself applies while keeping
+// the slicers, so the comparison group is the selected market.
+VAR ThisOcc     = [Est. Occupancy Rate]
+VAR ThisPrice   = [Median Nightly Price]
+VAR MarketOcc   = CALCULATE ( [Est. Occupancy Rate],   ALLSELECTED () )
+VAR MarketPrice = CALCULATE ( [Median Nightly Price], ALLSELECTED () )
+VAR OccGap      = ThisOcc - MarketOcc
+VAR PriceIx     = DIVIDE ( ThisPrice, MarketPrice )
+RETURN
+    SWITCH (
+        TRUE (),
+        ISBLANK ( ThisPrice ),          BLANK (),
+        OccGap >= 0.03 && PriceIx >= 1, "Premium, high est. demand",
+        OccGap >= 0.03,                 "Value-driven est. demand",
+        PriceIx >= 1,                   "Priced above selected market",
+        "Below selected market"
+    )
+
+EVALUATE ROW("Total Listings", [Total Listings])
