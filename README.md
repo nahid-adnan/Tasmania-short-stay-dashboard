@@ -28,7 +28,7 @@ This report examines Tasmania's short-term rental market from four angles: how t
 
 It pairs KPI cards with a geographic map, distribution and comparison charts, a drill-through register, and a hover tooltip — plus a **what-if repricing scenario** for revenue modelling.
 
-> **What the calendar measures.** The report calculates unavailable nights as 365 minus available nights. The 44.6% headline averages that share across listings. Some nights may be blocked by owners. Multiplying unavailable nights by each listing’s advertised nightly price and summing gives the A$145.3 million annual revenue scenario. Actual bookings, discounts and paid rates are unknown. The repricing slider assumes a demand elasticity of −0.6.
+> **What the calendar measures.** The report calculates unavailable nights as 365 minus available nights. The 44.6% headline averages that share across listings. Some nights may be blocked by owners. Multiplying unavailable nights by each listing’s advertised nightly price and summing gives the A$145.3 million annual revenue scenario. Actual bookings, discounts and paid rates are unknown. The repricing slider assumes a demand elasticity of −0.6. The original PBIX and screenshot use the words “upper bound”. Read that wording as a scenario assumption. An upper bound on actual revenue cannot be established from this snapshot.
 
 ---
 
